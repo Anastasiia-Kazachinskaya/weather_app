@@ -1,0 +1,56 @@
+body, h1, h2, h3, h4, p, a, form, footer {
+  margin: 0;
+  font-size: 100%;
+  font-weight: normal;
+
+}
+
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 40px;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: auto;
+  margin-top: 10px;
+
+}
+
+header {
+  height: 100vh;
+  background-color: #eee;
+  background-image: url(https://falcon-eyes.ru/upload/resize_cache/iblock/042/255_258_1/0422e44b134456c1a9b5411740a2859a.jpg);
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+button {
+ margin: auto;
+ font-family: 'Helvetica', 'Arial', sans-serif;
+ font-size: 40%;
+}
+
+h2 {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 20px;
+  color: white;
+  text-transform: capitalize;
+  font-weight: 50;
+  margin: auto;
+  margin-top: 10px;
+}
+
+h3 {
+color: #eee;
+}
+
+footer {
+  color: black;
+  size: 35px;
+}
