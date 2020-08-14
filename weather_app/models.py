@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from django.utils import timezone
 
 class People(models.Model):
@@ -7,8 +8,9 @@ class People(models.Model):
     def __str__(self):
         return self.city
 
-class Meta:
-    model = People
-    fields = ['city', 'date']
+class Meta(ModelForm):
+    class Meta:
+        model = People
+        fields = ['city']
 
 
