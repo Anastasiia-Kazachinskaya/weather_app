@@ -1,16 +1,26 @@
+
 from django.db import models
 from django.forms import ModelForm
-from django.utils import timezone
 
-class People(models.Model):
-    city = models.CharField(max_length=200)
+
+PERIOD_CHOICES = (
+    ('H', 'Почасовой прогноз'),
+    ('D', 'Прогноз на неделю'),
+    ('W', 'Двухнедельный прогноз'),
+)
+
+
+
+class City(models.Model):
+    '''Модель описывает город и период прогноза погоды'''
+    city = models.CharField(max_length=200, verbose_name='')
+    period = models.CharField(max_length=1, choices=PERIOD_CHOICES,)
 
     def __str__(self):
         return self.city
 
-class Meta(ModelForm):
+
+class CityForm(ModelForm):
     class Meta:
-        model = People
-        fields = ['city']
-
-
+        model = City
+        fields = ['city',] # 'period']

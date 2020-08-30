@@ -1,83 +1,55 @@
-<!doctype html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Прогноз Погоды</title>
-        {% load static %}
-        <link rel="icon" type="image" href="https://code.s3.yandex.net/web-code/playlist-favicon.ico">
-        <link rel="stylesheet" href="{% static 'style.css' %}">
-        <style>
-           h1 {
-              font-size: 30px;
-              text-transform: uppercase;
-              font-style: italic;
-              margin-top: 20px;
-              margin-bottom: 20px;
-              }
-           p {
-              font-size: 20px;
-              text-transform: uppercase;
-              font-style: italic;
-           }
-           h4 {
-              font-size: 20px;
-              text-transform: uppercase;
-              font-style: italic;
-              margin: auto;
-              }
-           body {
-               font-family: 'Helvetica', 'Arial', sans-serif;
-               font-size: 40px;
-               color: white;
-               text-transform: uppercase;
-               font-weight: 500;
-               margin: auto;
-               margin-top: 10px;
-               }
-           header {
-               height: 100vh;
-               background-color: #eee;
-               background-image: url(https://falcon-eyes.ru/upload/resize_cache/iblock/042/255_258_1/0422e44b134456c1a9b5411740a2859a.jpg);
-               background-size: cover;
-               background-position: center;
-               text-align: center;
-               margin: auto;
-              }
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Weather Forecast</title>
 
-           footer {
-              color: black;
-              size: 5px;
-              margin-top: 200px;
-              }
-         </style>
+    <link rel="icon" type="image" href="https://code.s3.yandex.net/web-code/playlist-favicon.ico">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-    </head>
-    <body>
-            <header class="header">
-            <div class="overlay">
-            <h1 class="header-title">Узнайте какая погода у вас в городе прямо сейчас</h1>
-                <form method="POST">
-                    {% csrf_token %}
-                    <p> Введите название города{{ form }}</p>
-                    <input type="submit" value="Отправить">
-                </form>
+</head>
+<body>
+<header class="header">
+    <h2 class="overlay">
+        <h1 class="header-title">weather<br>app</h1>
+    </h2>
+</header>
 
-            <br>
-            {% if weather %}
+<h1 class="between">
+    <div>
+    <form method="POST">
+        {% csrf_token %}
+        <p>Enter the name of the city<br>{{ form }}</p>
+        <input  type="submit" value="Send">
 
-                <h4>Погода в г. {{ weather.name }}:</h4>
+    </form>
+    <a>
 
-                <br>Температура воздуха {{ weather.main.temp|floatformat:0 }}°
-
-            {% endif %}
-
-            </div>
-                <footer class="footer">
-                    <h4 class="footer-author">Anastasia K.</h4>
-                </footer>
-            </header>
-    </body>
+    {% if weather %}
+    Weather in {{ weather.name }}:
+    <br>{{ weather.weather.0.description }}
+    <br>Temperature {{ weather.main.temp|floatformat:0 }}°
+    <br>Feels like {{ weather.main.feels_like|floatformat:0 }}°
+    <br>{% if weather.wind.deg <= 22.5 %}Northern Wind
+    {% elif weather.wind.deg <= 67.5 %}Northeast Wind
+    {% elif weather.wind.deg <= 112.5 %}Eastern Wind
+    {% elif weather.wind.deg <= 157.5 %}Southeast Wind
+    {% elif weather.wind.deg <= 202.5 %}South Wind
+    {% elif weather.wind.deg <= 247.5 %}Southwest Wind
+    {% elif weather.wind.deg <= 292.5 %}West Wind
+    {% elif weather.wind.deg <= 337.5 %}Northwest Wind
+    {% else %}Northern Wind
+    {% endif %} {{ weather.wind.speed|floatformat:1 }}m/s
+    <br>Humidity {{ weather.main.humidity }}%
+    {% endif %}
+    </a>
+    </div>
+</h1>
+<footer class="footer">
+    <h3>Made by</h3>
+    <h4 class="footer-author">Anastasia K.</h4>
+</footer>
+</body>
 </html>
-
-
